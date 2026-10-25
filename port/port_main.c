@@ -941,9 +941,26 @@ static f32 vmu_progress(void) {
     return (gVmuDone + car->road.t * vmu_seg(p)) / gVmuTotal;
 }
 
+/* the animated logo (port/art/vmu_logo.h): which frame shows now; the game
+ * runs at 30 frames a second, the logo's own timing is in ms */
+#include "art/vmu_logo.h"
+static s32 vmu_logo_frame(void) {
+    static u32 ms;
+    u32 total = 0, t;
+    s32 i;
+    for (i = 0; i < VMU_LOGO_FRAMES; i++) {
+        total += gVmuLogoMs[i];
+    }
+    ms = (ms + 33) % (total ? total : 1);   /* (a game frame: 1/30 s) */
+    for (i = 0, t = ms; i < VMU_LOGO_FRAMES - 1 && t >= gVmuLogoMs[i]; i++) {
+        t -= gVmuLogoMs[i];
+    }
+    return i;
+}
+
 void port_vmu_frame(void) {
-    static s32 shown = -2;               /* -1 the placeholder, 0..100 the distance */
-    s32 want = -1;
+    static s32 shown = -2;               /* -1000 - n: the logo's frame n; 0..100: the distance */
+    s32 want;
     if (gCurrentOverlay == OVL_RACE) {
         f32 f = vmu_progress();
         want = (gRaceState == 2) ? 100 : (gRaceState == 0) ? 0 : (s32)(f * 100.0f);
@@ -952,6 +969,7 @@ void port_vmu_frame(void) {
         if (want == 100 && gRaceState != 2) want = 99;   /* (100% when the race is over) */
     } else {
         gVmuPoint = -1;                  /* (the next race starts afresh) */
+        want = -1000 - vmu_logo_frame();
     }
     if (want == shown) {
         return;
@@ -962,8 +980,8 @@ void port_vmu_frame(void) {
         for (i = 0; i < sizeof(gVmuBits); i++) gVmuBits[i] = 0;
     }
     if (want < 0) {
-        vmu_text("CRUIS'N", 7, 1);
-        vmu_text("USA", 18, 1);
+        plat_vmu_lcd(gVmuLogo[-1000 - want]);
+        return;
     } else {
         char num[8];
         s32 n = 0;

@@ -277,7 +277,7 @@ int plat_save_read(int dev, void *buf, int size) {
 
 /* The VMU screen (port_main.c port_vmu_frame): player 1's VMU with a screen. Sending a
  * picture waits for the VMU's answer, so a thread of its own does it while the game goes on;
- * it checks a few times a second for a new picture or a VMU plugged in. The VMU shows its
+ * it checks 100 times a second for a new picture or a VMU plugged in. The VMU shows its
  * screen data upside down (as KallistiOS's vmu_set_icon): turned round here. */
 static uint8_t gLcdWant[192];
 static volatile int gLcdSeq;
@@ -324,7 +324,7 @@ static void *lcd_thread(void *arg) {
             done = seq;
         }
         last = d;
-        thd_sleep(100);
+        thd_sleep(10);                   /* (the logo changes 25 times a second) */
     }
     return NULL;
 }
