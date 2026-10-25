@@ -106,6 +106,7 @@ Note: If your Dreamcast's calendar date is set to 24th/25th December, it will be
 
 ## Credits
 
+- Thanks to Brendan "[Cypress](https://github.com/cypressru)" Lawson for Dreamcast development help and advice on tap!
 - [KallistiOS](https://github.com/KallistiOS/KallistiOS) and the Dreamcast homebrew
   community, [mkdcdisc](https://gitlab.com/simulant/mkdcdisc), [Flycast](https://github.com/flyinghead/flycast).
 - Secret rain effect: modelled from Top Gear Rally's rain effect ([Top Gear Rally decompilation](https://github.com/jeff-strutb/brally)).
