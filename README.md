@@ -73,6 +73,8 @@ The controls can be configured in OPTIONS -> CONTROLLER SETUP.
 Plug a VMU into the controller plugged into "Port A". The game saves your records, unlocked tracks,
 faster cars and settings directly to the VMU (file `CRUISNUS.SYS`). This VMU file can be uploaded to Cruisn.net on a Dreamcast console to enter the online leaderboards. During a race, the VMU's screen shows how far you are through your race.
 
+![The VMU screen during a race](images/vmu-screen.png)
+
 ## Cheats
 
 Plug a Dreamcast keyboard into "Port B", type a code on the **Choose Race** screen and press Enter.
