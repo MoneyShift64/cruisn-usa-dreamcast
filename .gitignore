@@ -1,0 +1,28 @@
+# ROMs: never commit them
+*.z64
+*.n64
+*.v64
+*.rom
+# build output
+build/
+dc/game/obj/
+dc/game/cd/
+dc/game/gen/*.bin
+dc/game/profile-elfs/
+dc/cd/
+*.o
+*.elf
+*.cdi
+*.iso
+# generated from your ROM
+asm/
+assets/*
+!assets/vmu/
+# misc
+*.wav
+*.tgz
+*.zip
+__pycache__/
+.DS_Store
+._*
+vmu0.sav
